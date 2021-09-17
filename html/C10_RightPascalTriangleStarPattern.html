@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Numbers Play</title>
+	<script>
+		const colors = ['#ff5500', '#ff0000', 'Cyan', 'Chartreuse', 'White', '#ff007f', '#7627ff', '#ffff00'];
+		function play() {
+			document.getElementById('playGround').innerHTML = '';
+			let height = parseInt(document.getElementById('height').value);
+			applyLogic(height);
+		}
+		function applyLogic(height) {
+			let x = 0;
+			for (let i = 0; i <= height - 1; i++) {
+				let stars = '';
+				for (let j = 0; j <= i; j++) {
+					stars = stars + '* ';
+				}
+				setTimeout(function () {
+					applyPlay(stars);
+				}, 200 * (x++));
+			}
+			for (let i = height - 1; i >= 0; i--) {
+				let stars = '';
+				for (let j = 0; j <= i - 1; j++) {
+					stars = stars + '* ';
+				}
+				setTimeout(function () {
+					applyPlay(stars);
+				}, 200 * (x++));
+			}
+		}
+		function applyPlay(text) {
+			let type = document.createElement('h1');
+			let random = Math.floor((Math.random() * colors.length));
+			type.style.color = colors[random];
+			type.style.fontSize = '60px';
+			type.style.fontWeight = '900';
+			type.style.margin = '0px';
+			type.style.padding = '0px';
+			type.appendChild(document.createTextNode(text));
+			document.getElementById('playGround').appendChild(type);
+		}
+		function incrementOrDecrement(count) {
+			let height = document.getElementById('height').value;
+			document.getElementById('height').value = parseInt(height) + count;
+			play();
+		}
+	</script>
+</head>
+
+<body>
+	<table id='starTable' style='width: 40%;background-color: black;'>
+		<tr>
+			<td>
+				<label for='height'
+					style='font-size: 20px;margin-left: 5%;font-weight: 900;color: Chartreuse;font-size: x-large;'>Enter
+					Height</label>
+				<input type='text' id='height' placeholder='Numbers' value='3'
+					style='padding-left: 1%;font-weight: 900;width: 59.5%;text-align: center;' />
+			</td>
+			<td>
+				<button onClick='incrementOrDecrement(1)' onMouseOver="this.style.color='blue'"
+					onMouseOut="this.style.color='black'"
+					style='width: 100%; align-content: center;font-weight: 900; font-size: larger;'>Increment</button>
+			</td>
+		</tr>
+		<tr>
+			<td><button onClick='play()' onMouseOver="this.style.color='red'" onMouseOut="this.style.color='black'"
+					style='width: 90%; align-content: center;font-weight: 900;margin-left: 5%;margin-right: 5%;background-color: white;color: Blue;height: 35px;font-size: large;'>
+					Right Pascal Triangle Star Pattern Play</button>
+			</td>
+			<td>
+				<button onClick='incrementOrDecrement(-1)' onMouseOver="this.style.color='blue'"
+					onMouseOut="this.style.color='black'"
+					style='width: 100%; align-content: center;font-weight: 900;font-size: larger;'>Decrement</button>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2'>
+				<ol id='playGround' style='height: 620px;'></ol>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Numbers Play</title>
+	<script>
+		const colors = ['#ff5500', '#ff0000', 'Cyan', 'Chartreuse', 'White', '#ff007f', '#7627ff', '#ffff00'];
+		function play() {
+			document.getElementById('playGround').innerHTML = '';
+			let tableNumber = parseInt(document.getElementById('tableNumber').value);
+			applyLogic(tableNumber);
+		}
+		function applyLogic(tableNumber) {
+			for (let counter = 1; counter <= 10; counter++) {
+				let addedValue = tableNumber + counter;
+				setTimeout(function () {
+					applyPlay(tableNumber + ' + ' + counter + ' = ' + addedValue);
+				}, 200 * counter);
+			}
+		}
+		function applyPlay(text) {
+			let type = document.createElement('h1');
+			let random = Math.floor((Math.random() * colors.length));
+			type.style.color = colors[random];
+			type.style.fontSize = '50px';
+			type.style.fontWeight = '900';
+			type.style.margin = '0px';
+			type.style.marginRight = '50px';
+			type.style.padding = '0px';
+			type.appendChild(document.createTextNode(text));
+			document.getElementById('playGround').appendChild(type);
+		}
+		function incrementOrDecrement(count) {
+			let tableNumber = document.getElementById('tableNumber').value;
+			document.getElementById('tableNumber').value = parseInt(tableNumber) + count;
+			play();
+		}
+	</script>
+</head>
+
+<body>
+	<table id='starTable' style='width: 40%;background-color: black;'>
+		<tr>
+			<td>
+				<label for='tableNumber'
+					style='font-size: 20px;margin-left: 5%;font-weight: 900;color: Chartreuse;font-size: x-large;'>Enter
+					Number</label>
+				<input type='text' id='tableNumber' placeholder='Numbers' value='4'
+					style='padding-left: 1%;font-weight: 900;width: 55.5%;text-align: center;' />
+			</td>
+			<td>
+				<button onClick='incrementOrDecrement(1)' onMouseOver="this.style.color='blue'"
+					onMouseOut="this.style.color='black'"
+					style='width: 100%; align-content: center;font-weight: 900; font-size: larger;'>Increment</button>
+			</td>
+		</tr>
+		<tr>
+			<td><button onClick='play()' onMouseOver="this.style.color='red'" onMouseOut="this.style.color='black'"
+					style='width: 90%; align-content: center;font-weight: 900;margin-left: 5%;margin-right: 5%;background-color: white;color: Blue;height: 35px;font-size: large;'>
+					Addition Table Generator</button>
+			</td>
+			<td>
+				<button onClick='incrementOrDecrement(-1)' onMouseOver="this.style.color='blue'"
+					onMouseOut="this.style.color='black'"
+					style='width: 100%; align-content: center;font-weight: 900;font-size: larger;'>Decrement</button>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2'>
+				<ol id='playGround' style='height: 580px;'></ol>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>
